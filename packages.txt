@@ -1,0 +1,10 @@
+bat
+eza
+fzf
+git
+nvim
+password-store
+starship
+stow
+wl-clipboard
+zsh

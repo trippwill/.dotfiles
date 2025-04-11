@@ -1,0 +1,391 @@
+# Starship two-line prompt with left and right top sections
+# Prefer non-nerd fonts for the prompt
+
+# $all is shorthand for $username$hostname$localip$shlvl$singularity$kubernetes$nats$directory$vcsh$fossil_branch$fossil_metrics$git_branch$git_commit$git_state$git_metrics$git_status$hg_branch$pijul_channel$docker_context$package$bun$c$cmake$cobol$daml$dart$deno$dotnet$elixir$elm$erlang$fennel$gleam$golang$gradle$haskell$haxe$helm$java$julia$kotlin$lua$mojo$nim$nodejs$ocaml$odin$opa$perl$php$pulumi$purescript$python$quarto$raku$rlang$red$ruby$rust$scala$solidity$swift$terraform$typst$vlang$vagrant$zig$buf$guix_shell$nix_shell$conda$meson$spack$memory_usage$aws$gcloud$openstack$azure$direnv$env_var$crystal$custom$sudo$cmd_duration$line_break$jobs$battery$time$status$container$os$shell$character
+"$schema" = "https://starship.rs/config-schema.json"
+format = '''
+$username$hostname$localip$shlvl$singularity$kubernetes$nats$directory$vcsh$fossil_branch$fossil_metrics$git_branch$git_commit$git_state$git_metrics$git_status$hg_branch$pijul_channel$docker_context$sudo$cmd_duration$fill$all
+$jobs$battery$time$status$container$os$shell$character
+'''
+
+continuation_prompt = "[∙](bright-black) "
+scan_timeout = 30
+command_timeout = 500
+add_newline = true
+follow_symlinks = true
+
+[aws]
+symbol = "  "
+
+[azure]
+symbol = "󰠅 "
+
+[battery]
+full_symbol = "󰁹 "
+charging_symbol = "󰂄 "
+discharging_symbol = "󰂃 "
+unknown_symbol = "󰁽 "
+empty_symbol = "󰂎 "
+
+[buf]
+symbol = " "
+
+[bun]
+symbol = ""
+
+[c]
+symbol = " "
+
+[character]
+format = "$symbol "
+success_symbol = "[❯](bold green)"
+error_symbol = "[❯](bold red)"
+vimcmd_symbol = "[❮](bold green)"
+vimcmd_visual_symbol = "[❮](bold yellow)"
+vimcmd_replace_symbol = "[❮](bold purple)"
+vimcmd_replace_one_symbol = "[❮](bold purple)"
+disabled = false
+
+[cmake]
+symbol = " "
+
+[cmd_duration]
+min_time = 2000
+format = "took [$duration]($style) "
+style = "yellow bold"
+show_milliseconds = false
+disabled = false
+show_notifications = false
+min_time_to_notify = 45000
+
+[cobol]
+symbol = "⚙️ "
+
+[conda]
+symbol = " "
+
+[container]
+symbol = "⬢"
+
+[crystal]
+symbol = " "
+
+[daml]
+symbol = "Λ "
+
+[dart]
+symbol = " "
+
+[deno]
+symbol = " "
+
+[directory]
+truncation_length = 3
+truncate_to_repo = true
+fish_style_pwd_dir_length = 0
+use_logical_path = true
+format = "[$path]($style)[$read_only]($read_only_style) "
+repo_root_format = "[$before_root_path]($before_repo_root_style)[$repo_root]($repo_root_style)[$path]($style)[$read_only]($read_only_style) "
+style = "cyan bold"
+disabled = false
+read_only = " 󰌾"
+read_only_style = "red"
+truncation_symbol = "/"
+home_symbol = "~"
+use_os_path_sep = true
+before_repo_root_style = "green"
+repo_root_style = "purple italic"
+
+[directory.substitutions]
+'/home/tripp/.config' = '~/.config'
+
+[direnv]
+format = "[$symbol$loaded/$allowed]($style) "
+symbol = "direnv "
+style = "bold bright-yellow"
+disabled = true
+detect_extensions = []
+detect_env_vars = ["DIRENV_FILE"]
+detect_files = [".envrc"]
+detect_folders = []
+allowed_msg = "allowed"
+not_allowed_msg = "not allowed"
+denied_msg = "denied"
+loaded_msg = "loaded"
+unloaded_msg = "not loaded"
+
+[docker_context]
+symbol = " "
+
+[dotnet]
+symbol = "󰪮 "
+
+[elixir]
+symbol = " "
+
+[elm]
+symbol = " "
+
+[env_var]
+
+[erlang]
+symbol = " "
+
+[fill]
+style = "bold black"
+symbol = " "
+disabled = false
+
+[gcloud]
+symbol = "☁️  "
+
+[git_branch]
+symbol = " "
+
+[git_commit]
+tag_symbol = "  "
+tag_disabled = false
+tag_max_candidates = 2
+
+[git_metrics]
+added_style = "bold green"
+deleted_style = "bold red"
+only_nonzero_diffs = true
+format = "([+$added]($added_style) )([-$deleted]($deleted_style) )"
+disabled = true
+ignore_submodules = false
+
+[git_state]
+rebase = "REBASING"
+merge = "MERGING"
+revert = "REVERTING"
+cherry_pick = "CHERRY-PICKING"
+bisect = "BISECTING"
+am = "AM"
+am_or_rebase = "AM/REBASE"
+style = "bold yellow"
+format = '\([$state( $progress_current/$progress_total)]($style)\) '
+disabled = false
+
+[git_status]
+format = '([\[$all_status$ahead_behind\]]($style) )'
+style = "red bold"
+stashed = '\$'
+ahead = "⇡"
+behind = "⇣"
+up_to_date = ""
+diverged = "⇕"
+conflicted = "="
+deleted = "✘"
+renamed = "»"
+modified = "!"
+staged = "+"
+untracked = "?"
+typechanged = ""
+ignore_submodules = false
+disabled = false
+
+[gleam]
+symbol = " "
+
+[golang]
+symbol = " "
+
+
+[haskell]
+symbol = " "
+
+[helm]
+symbol = "⎈ "
+
+[hostname]
+ssh_only = true
+ssh_symbol = " "
+trim_at = "."
+detect_env_vars = []
+format = "[$ssh_symbol$hostname]($style) in "
+style = "green dimmed bold"
+disabled = false
+
+[hostname.aliases]
+
+[jobs]
+threshold = 1
+symbol_threshold = 1
+number_threshold = 2
+format = "[$symbol$number]($style) "
+symbol = "✦"
+style = "bold blue"
+disabled = false
+
+[julia]
+format = "via [$symbol($version )]($style)"
+version_format = "v${raw}"
+symbol = " "
+style = "bold purple"
+disabled = false
+detect_extensions = ["jl"]
+detect_files = ["Project.toml", "Manifest.toml"]
+detect_folders = []
+
+[kubernetes]
+symbol = "☸ "
+format = '[$symbol$context( \($namespace\))]($style) in '
+style = "cyan bold"
+disabled = true
+detect_extensions = []
+detect_files = []
+detect_folders = []
+detect_env_vars = []
+contexts = []
+
+[line_break]
+disabled = true
+
+[localip]
+ssh_only = true
+format = "[$localipv4]($style) "
+style = "yellow bold"
+disabled = true
+
+[lua]
+symbol = " "
+
+[memory_usage]
+symbol = "󰍛 "
+disabled = true
+
+[meson]
+symbol = "󰔷 "
+
+[nodejs]
+symbol = " "
+
+[ocaml]
+symbol = " "
+
+[odin]
+symbol = "Ø "
+
+
+[os]
+format = "[$symbol]($style)"
+style = "bold white"
+disabled = false
+
+[os.symbols]
+Alpaquita = " "
+Alpine = " "
+AlmaLinux = " "
+Amazon = " "
+Android = " "
+Arch = " "
+Artix = " "
+CachyOS = " "
+CentOS = " "
+Debian = " "
+DragonFly = " "
+Emscripten = " "
+EndeavourOS = " "
+Fedora = " "
+FreeBSD = " "
+Garuda = "󰛓 "
+Gentoo = " "
+HardenedBSD = "󰞌 "
+Illumos = "󰈸 "
+Kali = " "
+Linux = " "
+Mabox = " "
+Macos = " "
+Manjaro = " "
+Mariner = " "
+MidnightBSD = " "
+Mint = " "
+NetBSD = " "
+NixOS = " "
+Nobara = " "
+OpenBSD = "󰈺 "
+openSUSE = " "
+OracleLinux = "󰌷 "
+Pop = " "
+Raspbian = " "
+Redhat = " "
+RedHatEnterprise = " "
+RockyLinux = " "
+Redox = "󰀘 "
+Solus = "󰠳 "
+SUSE = " "
+Ubuntu = " "
+Unknown = " "
+Void = " "
+Windows = "󰍲 "
+
+[package]
+symbol = "󰏗 "
+
+[python]
+symbol = " "
+
+[rust]
+symbol = "󱘗 "
+
+[shell]
+format = "[$indicator]($style) "
+bash_indicator = "bsh"
+zsh_indicator = "zsh"
+powershell_indicator = "psh"
+tcsh_indicator = "tsh"
+nu_indicator = "nu"
+cmd_indicator = "cmd"
+unknown_indicator = ""
+style = "white bold"
+disabled = true
+
+[status]
+format = "[$symbol$status]($style) "
+symbol = "❌"
+success_symbol = ""
+not_executable_symbol = "🚫"
+not_found_symbol = "🔍"
+sigint_symbol = "🧱"
+signal_symbol = "⚡"
+style = "bold red"
+map_symbol = false
+recognize_signal_code = true
+pipestatus = false
+pipestatus_separator = "|"
+pipestatus_format = '\[$pipestatus\] => [$symbol$common_meaning$signal_name$maybe_int]($style) '
+disabled = true
+
+[sudo]
+format = "[as $symbol]($style)"
+symbol = "󱑷 "
+style = "bold blue"
+allow_windows = false
+disabled = true
+
+[terraform]
+symbol = "💠 "
+
+[username]
+detect_env_vars = []
+format = "[$user]($style) in "
+style_root = "red bold"
+style_user = "yellow bold"
+show_always = false
+disabled = false
+
+[username.aliases]
+
+[vagrant]
+format = "via [$symbol($version )]($style)"
+version_format = "v${raw}"
+symbol = "⍱ "
+style = "cyan bold"
+disabled = false
+detect_extensions = []
+detect_files = ["Vagrantfile"]
+detect_folders = []
+
+[zig]
+symbol = " "

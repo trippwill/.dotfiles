@@ -1,0 +1,19 @@
+# This is Git's per-user configuration file.
+[user]
+	name = Charles Willis 
+	email = 5862883+trippwill@users.noreply.github.com
+[alias]
+	st = status
+	ci = commit
+    	sw = switch
+	br = branch
+	co = checkout
+	untrack = rm --cached
+	unadd = restore --staged
+	a = config --get-regexp '^alias\\.'
+[push]
+	autoSetupRemote = true
+[init]
+	defaultBranch = main
+[pull]
+	rebase = true
