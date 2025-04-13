@@ -5,6 +5,40 @@ return {
     --pin = true,
   },
   {
+    "olimorris/codecompanion.nvim",
+    opts = {},
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+    },
+    keys = {
+      {
+        "<Leader>ac",
+        "<cmd>CodeCompanionActions<cr>",
+        mode = { "n", "v" },
+        noremap = true,
+        silent = true,
+        desc = "Code Actions",
+      },
+      {
+        "<Leader>aa",
+        "<cmd>CodeCompanionChat Toggle<cr>",
+        mode = { "n", "v" },
+        noremap = true,
+        silent = true,
+        desc = "Toggle Chat",
+      },
+      {
+        "ga",
+        "<cmd>CodeCompanionChat Add<cr>",
+        mode = "v",
+        noremap = true,
+        silent = true,
+        desc = "Add to Chat",
+      },
+    },
+  },
+  {
     "saghen/blink.cmp",
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
@@ -86,30 +120,5 @@ return {
   --       end
   --     end, { expr = true, noremap = true, silent = true })
   --   end,
-  -- },
-  -- {
-  --   "jackMort/ChatGPT.nvim",
-  --   event = "VeryLazy",
-  --   opts = {
-  --     api_key_cmd = "pass api/openai",
-  --   },
-  --   keys = {
-  --     { "<leader>ag", "<cmd>ChatGPT<cr>", desc = "ChatGPT" },
-  --     { "<leader>aG", "<cmd>ChatGPTActAs<cr>", desc = "ChatGPT Act As" },
-  --     -- { "<leader>aR", "<cmd>ChatGPTRun<cr>", desc = "ChatGPT Run" },
-  --     { "<leader>ae", "<cmd>ChatGPTEditWithInstructions<cr>", desc = "ChatGPT Edit" },
-  --     { "<leader>art", "<cmd>ChatGPTRun add_tests<cr>", desc = "ChatGPT Add Tests" },
-  --     { "<leader>aro", "<cmd>ChatGPTRun optimize_code<cr>", desc = "ChatGPT Optimize code" },
-  --     { "<leader>arx", "<cmd>ChatGPTRun fix_bugs<cr>", desc = "ChatGPT Fix Bugs" },
-  --   },
-  --   config = function(opts)
-  --     require("chatgpt").setup(opts)
-  --   end,
-  --   dependencies = {
-  --     "MunifTanjim/nui.nvim",
-  --     "nvim-lua/plenary.nvim",
-  --     "folke/trouble.nvim", -- optional
-  --     "nvim-telescope/telescope.nvim",
-  --   },
   -- },
 }

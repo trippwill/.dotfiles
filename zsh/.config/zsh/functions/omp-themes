@@ -1,0 +1,1 @@
+eval "$(oh-my-posh init zsh --config $(fd -atf . "$XDG_CACHE_HOME/oh-my-posh/themes" "$XDG_CONFIG_HOME/omp/themes" | fzf --height=10 --layout=reverse-list))"

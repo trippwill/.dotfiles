@@ -1,30 +1,42 @@
 setopt autocd extendedglob
 unsetopt beep
 bindkey -v
+#export KEYTIMEOUT=1  # Optional: makes mode switching faster
 
-# Add custom_completions_dir to FPATH
-custom_completions_dir="$XDG_DATA_HOME/zsh/completions"
-if [[ ":$FPATH:" != *":$custom_completions_dir:"* ]]; then
-    FPATH="$custom_completions_dir:$FPATH"
-fi
-# --  Create the directory if it doesn't exist
-mkdir -p "$custom_completions_dir"
+## Completion Configuration
+zstyle ':completion:*:git-checkout:*' sort false # disable sort when completing `git checkout`
+zstyle ':completion:*:descriptions' format '[%d]' # set descriptions format to enable group support
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS} # set list-colors to enable filename colorizing
+zstyle ':completion:*' menu no # force zsh not to show completion menu, which allows fzf-tab to capture the unambiguous prefix
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath' # preview directory's content with eza when completing cd
+zstyle ':fzf-tab:*' fzf-flags --color=fg:1,fg+:2 --bind=tab:accept # custom fzf flags
+zstyle ':fzf-tab:*' switch-group '<' '>' # switch group using `<` and `>`
+
+# Setup fzf
+source <(fzf --zsh)
 
 # Antidote
 ANTIDOTE="$XDG_DATA_HOME/zsh/.antidote"
 # -- Ensure Antidote is installed
-if [[ ! -d "$ANTIDOTE" ]]; then
-  echo "Antidote not found at $ANTIDOTE, cloning..."
-  git clone --depth=1 https://github.com/mattmc3/antidote.git $ANTIDOTE
-fi
-# -- Load plugins
+[[ -e "$ANTIDOTE" ]] || git clone --depth=1 https://github.com/mattmc3/antidote.git $ANTIDOTE
+
+# -- Initialize Antidote
 source "$ANTIDOTE/antidote.zsh"
-antidote load
+source <(antidote init)
+
+# -- Load plugins
+antidote bundle romkatv/zsh-bench kind:path
+antidote bundle zsh-users/zsh-completions kind:fpath path:src
+antidote bundle zsh-users/zsh-autosuggestions
+antidote bundle Aloxaf/fzf-tab
+antidote bundle zdharma-continuum/fast-syntax-highlighting kind:defer
+antidote bundle belak/zsh-utils path:history
+antidote bundle belak/zsh-utils path:completion
 
 #  Setup exa
 typeset -ag eza_params
 eza_params=(
-  '--git' '--icons' '--group' '--group-directories-first'
+  '--icons' '--group' '--group-directories-first'
   '--time-style=relative' '--color-scale=all' '--color-scale-mode=fixed'
 )
 
@@ -43,6 +55,7 @@ alias tree='eza --tree $eza_params'
 # Other aliases
 
 alias cat='bat --color=always'
+alias zg='lazygit'
 
 alias ..='cd ..'
 alias ...='cd ../..'
@@ -55,6 +68,10 @@ alias gty.ed='nvim $XDG_CONFIG_HOME/ghostty/config'
 alias gty.keys='ghostty +list-keybinds | column -t -s = -H 1 | fzf --style=minimal --height=10 --info=hidden --border --border-label="ghostty keys" --border-label-pos=4'
 alias zyp='sudo zypper --color'
 
+alias v='nvim'
+alias vn='nvim -u NONE'
+alias vk='NVIM_APPNAME=kickstart.nvim nvim'
+
 # pnpm
 export PNPM_HOME="/home/tripp/.local/share/pnpm"
 case ":$PATH:" in
@@ -63,8 +80,25 @@ case ":$PATH:" in
 esac
 # pnpm end
 
-# Setup starship
-source <(starship init zsh)
-# Setup fzf
-source <(fzf --zsh)
+# Autoload functions
+for f in $ZDOTDIR/functions/*; do
+  autoload $f
+done
 
+# Source other environment files
+. "$HOME/.deno/env"
+. "$HOME/.cargo/env"
+
+if [[ "$tty" == "/dev/pts/0" ]]; then
+    fastfetch
+fi
+
+# Setup prompt
+function set_win_title(){
+    print -Pn "\e]0;[pty/$(basename $(tty))] ${PWD/#$HOME/~}\a"
+}
+precmd_functions+=(set_win_title)
+
+source <(starship init zsh)
+#source <(oh-my-posh init zsh --config "$XDG_CONFIG_HOME/omp/themes/tripp-pure.toml")
+#source "$XDG_CONFIG_HOME/omp/posh-vi-prompt.zsh"

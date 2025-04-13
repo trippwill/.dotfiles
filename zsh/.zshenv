@@ -19,7 +19,3 @@ export GOPATH="${XDG_DATA_HOME}/go"
 export GOBIN="${GOPATH}/bin"
 export PATH="${PATH}:${GOBIN}"
 export GOCACHE="${XDG_CACHE_HOME}/go-build"
-
-# Source other environment files
-. "$HOME/.deno/env"
-. "$HOME/.cargo/env"
