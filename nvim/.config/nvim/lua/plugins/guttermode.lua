@@ -3,10 +3,8 @@ return {
   name = "guttermode.nvim",
   event = "VeryLazy",
   opts = {
-    follow_cursor = false,
-    sign_char = "█", -- "▌", -- "▍", -- "▎" -- "▶", -- "│",
-    sign_priority = 1000,
-    debounce_ms = 75,
+    symbol = "█", -- "▌", -- "▍", -- "▎" -- "▶", -- "│",
+    unfocused_symbol = "│",
     debug = false,
   },
   config = function(_, opts)

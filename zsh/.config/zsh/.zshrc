@@ -15,6 +15,10 @@ zstyle ':fzf-tab:*' switch-group '<' '>' # switch group using `<` and `>`
 # Setup fzf
 source <(fzf --zsh)
 
+TMUX_SESSIONIZER_DIRS="$HOME/repos $HOME/.config"
+TMUX_SESSIONIZER_BIND="C-f"
+TMUX_SESSIONIZER_DEPTH=2
+
 # Antidote
 ANTIDOTE="$XDG_DATA_HOME/zsh/.antidote"
 # -- Ensure Antidote is installed
@@ -26,6 +30,7 @@ source <(antidote init)
 
 # -- Load plugins
 antidote bundle romkatv/zsh-bench kind:path
+antidote bundle nikevsoft/tmux-sessionizer
 antidote bundle zsh-users/zsh-completions kind:fpath path:src
 antidote bundle zsh-users/zsh-autosuggestions
 antidote bundle Aloxaf/fzf-tab
