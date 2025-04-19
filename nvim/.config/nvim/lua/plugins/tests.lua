@@ -32,9 +32,13 @@ return {
           "-coverprofile=" .. vim.fn.getcwd() .. "/coverage.out",
         },
       }
+      -- local dotnet_opts = {
+      --   discovery_root = "solution",
+      -- }
       require("neotest").setup({
         adapters = {
-          require("neotest-golang")(neotest_golang_opts), -- Registration
+          require("neotest-golang")(neotest_golang_opts),
+          -- require("neotest-dotnet")(dotnet_opts),
         },
       })
     end,

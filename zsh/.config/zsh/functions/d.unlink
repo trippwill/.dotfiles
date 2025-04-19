@@ -1,0 +1,8 @@
+local link="$1"
+local target=$(realpath -- "$link")
+if [ ! -L "$link" ]; then
+  echo "Not a symlink: $link"
+  return 1
+fi
+rm -- "$link" && mv -- "$target" "$link"
+

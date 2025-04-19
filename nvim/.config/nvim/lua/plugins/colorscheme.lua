@@ -3,7 +3,6 @@ return {
   {
     "ellisonleao/gruvbox.nvim",
     lazy = true,
-    priority = 1000,
     opts = {
       dim_inactive = true,
     },
@@ -14,7 +13,6 @@ return {
     "catppuccin/nvim",
     name = "catppuccin",
     lazy = true,
-    priority = 1000,
     config = function()
       -- vim.cmd.colorscheme("catppuccin")
       require("catppuccin").setup({
@@ -113,9 +111,9 @@ return {
         undercurl = true,
         commentStyle = { italic = true },
         functionStyle = { italic = true },
-        keywordStyle = { italic = false },
+        keywordStyle = { italic = true },
         statementStyle = { bold = true },
-        typeStyle = { italic = true },
+        typeStyle = { italic = false },
         variablebuiltinStyle = { italic = true },
         specialReturn = true,
         specialException = true,
@@ -123,6 +121,14 @@ return {
           local theme = colors.theme
           local _ = colors.palette
           return {
+            NormalFloat = { bg = "none" },
+            FloatBorder = { bg = "none" },
+            FloatTitle = { bg = "none" },
+
+            -- Save an hlgroup with dark background and dimmed foreground
+            -- so that you can use it where your still want darker windows.
+            -- E.g.: autocmd TermOpen * setlocal winhighlight=Normal:NormalDark
+            -- NormalDark = { fg = theme.ui.fg_dim, bg = theme.ui.bg_m3 },
             LazyNormal = { bg = theme.ui.bg_visual, fg = theme.ui.fg },
             MasonNormal = { bg = theme.ui.bg_visual, fg = theme.ui.fg },
           }

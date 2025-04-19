@@ -19,3 +19,7 @@ export GOPATH="${XDG_DATA_HOME}/go"
 export GOBIN="${GOPATH}/bin"
 export PATH="${PATH}:${GOBIN}"
 export GOCACHE="${XDG_CACHE_HOME}/go-build"
+
+# ASDF
+export ASDF_DATA_DIR=${XDG_DATA_HOME}/asdf
+export PATH="${ASDF_DATA_DIR}/shims:${PATH}"

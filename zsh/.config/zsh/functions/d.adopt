@@ -1,0 +1,39 @@
+local package="$1"
+local file="$2"
+local confirm="${3:-false}"
+
+# file and package are required
+if [[ -z "$file" || -z "$package" ]]; then
+  echo "file and package are required"
+  return 1
+fi
+
+# if file is a symlink return with message
+if [[ -L "$file" ]]; then
+  echo "$file is a symlink, not adopting"
+  return 1
+fi
+
+# if file is a directory return with message
+if [[ -d "$file" ]]; then
+  echo "$file is a directory, not adopting"
+  return 1
+fi
+
+# if resolved path is under .dotfiles return with message
+if [[ "$file" == *".dotfiles"* ]]; then
+  echo "$file is already under .dotfiles, not adopting"
+  return 1
+fi
+
+# touch the file path under .dotfiles/package relative to $HOME
+local relative_path
+relative_path=$(realpath --relative-to="$HOME" "$file")
+touch "$HOME/.dotfiles/$package/$relative_path"
+
+# adopt the package
+if [[ "$confirm" == "true" ]]; then
+  stow -d "$HOME/.dotfiles" -t "$HOME" -v --adopt "$package"
+else
+  stow -d "$HOME/.dotfiles" -t "$HOME" -nv --adopt "$package"
+fi

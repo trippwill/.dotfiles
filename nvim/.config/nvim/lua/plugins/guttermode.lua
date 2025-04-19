@@ -3,11 +3,7 @@ return {
   name = "guttermode.nvim",
   event = "VeryLazy",
   opts = {
-    symbol = "█", -- "▌", -- "▍", -- "▎" -- "▶", -- "│",
-    unfocused_symbol = "│",
+    symbol = "▌", -- "█", -- "▍", -- "▎" -- "▶", -- "│",
     debug = false,
   },
-  config = function(_, opts)
-    require("guttermode").setup(opts)
-  end,
 }
