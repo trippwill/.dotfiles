@@ -1,9 +1,17 @@
 return {
-  dir = "~/repos/guttermode.nvim", -- ✅ Local path to your plugin repo
-  name = "guttermode.nvim",
-  event = "VeryLazy",
-  opts = {
-    symbol = "▌", -- "█", -- "▍", -- "▎" -- "▶", -- "│",
-    debug = false,
+  {
+    dir = "~/repos/modechar.nvim/",
+    name = "modechar.nvim",
+    lazy = false,
+    opts = {
+      chars = {
+        gutter = { "▌" },
+        arrow = { "▶", inverted = true },
+      },
+      debug = 1,
+    },
+    config = function(_, opts)
+      require("modechar").setup(opts)
+    end,
   },
 }

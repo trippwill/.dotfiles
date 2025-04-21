@@ -1,5 +1,21 @@
 return {
   {
+    "folke/noice.nvim",
+    opts = {
+      lsp = {
+        signature = {
+          auto_open = {
+            enabled = false,
+          },
+        },
+      },
+      presets = {
+        command_palette = true,
+        long_message_to_split = true,
+      },
+    },
+  },
+  {
     "nvim-lualine/lualine.nvim",
     opts = {
       options = {
