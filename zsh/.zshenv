@@ -17,9 +17,12 @@ export LESS="-R -F -X"
 # Set the go paths
 export GOPATH="${XDG_DATA_HOME}/go"
 export GOBIN="${GOPATH}/bin"
-export PATH="${PATH}:${GOBIN}"
 export GOCACHE="${XDG_CACHE_HOME}/go-build"
 
-# ASDF
-export ASDF_DATA_DIR=${XDG_DATA_HOME}/asdf
-export PATH="${ASDF_DATA_DIR}/shims:${PATH}"
+export TMUX_SESSIONIZER_DIRS="$HOME/repos $HOME/.config"
+export TMUX_SESSIONIZER_BIND="C-f"
+export TMUX_SESSIONIZER_DEPTH=2
+
+export PNPM_HOME="/home/tripp/.local/share/pnpm"
+
+export PATH="$HOME/.local/bin:$GOBIN:$PNPM_HOME:$PATH"

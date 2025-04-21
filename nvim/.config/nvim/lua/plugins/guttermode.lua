@@ -8,7 +8,7 @@ return {
         gutter = { "▌" },
         arrow = { "▶", inverted = true },
       },
-      debug = 1,
+      debug = false,
     },
     config = function(_, opts)
       require("modechar").setup(opts)

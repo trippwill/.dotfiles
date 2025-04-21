@@ -1,0 +1,13 @@
+[tools]
+deno = "latest"
+dotnet = "latest"
+erlang = "latest"
+gleam = "latest"
+glow = "latest"
+neovim = "latest"
+node = "22"
+pnpm = "latest"
+rebar = "latest"
+rust = "latest"
+tree-sitter = "latest"
+usage = "latest"
