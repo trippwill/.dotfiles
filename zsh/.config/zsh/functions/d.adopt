@@ -1,10 +1,31 @@
 #! /usr/bin/env zsh
 
 function d.adopt() {
-  local package="$1"
-  local file="$2"
-  local confirm="${3:-false}"
+  local package=""
+  local file=""
+  local confirm="false"
   local dotfiles_dir=${DOTFILES_DIR:-$HOME/.dotfiles}
+
+  # Parse arguments
+  while [[ "$#" -gt 0 ]]; do
+    case "$1" in
+      --confirm)
+        confirm="true"
+        shift
+        ;;
+      *)
+        if [[ -z "$package" ]]; then
+          package="$1"
+        elif [[ -z "$file" ]]; then
+          file="$1"
+        else
+          echo "Error: Unexpected argument '$1'."
+          return 1
+        fi
+        shift
+        ;;
+    esac
+  done
 
   # file and package are required
   if [[ -z "$file" || -z "$package" ]]; then
