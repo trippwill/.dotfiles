@@ -1,47 +1,32 @@
 return {
+  ---@module 'modechar'
   {
-    dir = "~/repos/modechar.nvim",
-    name = "modechar",
-    module = "modechar",
+    'trippwill/modechar.nvim',
+    dev = false,
+    name = 'modechar.nvim',
+    module = 'modechar',
+    -- lazy = false,
     ---@type ModeCharOptions
     opts = {
       chars = {
-        gutter = { "▌", highlight = "ModeCharGutter", clear_hl = true, buftype = { "", "nofile" } },
-        arrow = { "▶", highlight = "Modahl" },
+        gutter = { '▌', highlight = 'ModeCharGutter', clear_hl = true, buftype = { '', 'nofile' } },
+        arrow = { '▶', highlight = 'ModeCharArrow' },
       },
       debug = false,
-    },
-    config = function(_, opts)
-      require("modechar").setup(opts)
-    end,
-  },
-  {
-    dir = "~/repos/modechar.nvim/lua/modahl/",
-    name = "modahl",
-    module = "modahl",
-    event = "VimEnter",
-    dependencies = {
-      { "nvim-lualine/lualine.nvim", optional = true },
-    },
-    ---@type ModahlOptions
-    opts = {
-      hl_groups = {
-        {
-          "ModeCharGutter",
-          adapter = "lualine-invert", -- Add lualine as a dependency to use this adapter
-        },
-        {
-          -- Use the default "Modahl" group
-          adapter = "lualine", -- Add lualine as a dependency to use this adapter
-          links = {
-            "CursorColumn",
+      modahl_opts = {
+        highlights = {
+          {
+            'ModeCharGutter',
+            adapter = 'lualine-invert',
+          },
+          {
+            'ModeCharArrow',
+            adapter = 'debug',
+            links = { 'CursorColumn' },
           },
         },
+        debug = false,
       },
-      debug = false,
     },
-    config = function(_, opts)
-      require("modahl").setup(opts)
-    end,
   },
 }

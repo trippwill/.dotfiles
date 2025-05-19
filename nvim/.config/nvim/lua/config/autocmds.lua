@@ -8,12 +8,12 @@
 -- e.g. vim.api.nvim_del_augroup_by_name("lazyvim_wrap_spell")
 
 -- Do not auto comment new lines
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "*",
-  callback = function()
-    vim.opt.formatoptions:remove({ "c", "r", "o" })
-  end,
-})
+-- vim.api.nvim_create_autocmd("FileType", {
+--   pattern = "*",
+--   callback = function()
+--     vim.opt.formatoptions:remove({ "c", "r", "o" })
+--   end,
+-- })
 
 -- vim.api.nvim_create_autocmd("User", {
 --   pattern = "BlinkCmpCompletionMenuOpen",
