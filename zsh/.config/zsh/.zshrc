@@ -96,7 +96,7 @@ PS2=$'%{\e]133;P;k=s\a%}'$PS2$'%{\e]133;B\a%}'
 
 # ---------------------------------------------------------
 
-if [[ "$tty" == "/dev/pts/0" ]]; then
+if [[ "$TTY" == "/dev/pts/0" ]]; then
     fastfetch
 fi
 eval "$(gh copilot alias -- zsh)"

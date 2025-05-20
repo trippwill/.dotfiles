@@ -92,7 +92,7 @@ return {
       require('kanagawa').setup({
         compile = true,
         transparent = false,
-        dimInactive = true,
+        dimInactive = false,
         terminalColors = true,
         theme = 'kanagawa',
         background = {
@@ -145,7 +145,7 @@ return {
             BlinkCmpDoc = blink_menu,
             BlinkCmpDocBorder = blink_menu_border,
             BlinkCmpMenu = blink_menu,
-            BlinkCmpMenuBorder = blink_menu_border,
+            BlinkCmpSignatureHelpBorderr = blink_menu_border,
           }
         end,
       })

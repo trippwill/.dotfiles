@@ -1,15 +1,5 @@
-bat
 curl
-eza
-fastfetch
-fd
-fzf
 git
-nvim
 password-store
-rg
-starship
 stow
-wl-clipboard
-yazi
 zsh
