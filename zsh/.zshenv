@@ -6,6 +6,8 @@ export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
 # Tell zsh to use the XDG-compliant config directory.
 export ZDOTDIR="${XDG_CONFIG_HOME}/zsh"
 
+export TERMINAL="ghostty"
+
 # Set the default editor to nvim
 export EDITOR="nvim"
 export VISUAL="nvim"

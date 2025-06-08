@@ -3,11 +3,31 @@
     
   ],
   "mcpServers": {
+    "context7": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@upstash/context7-mcp"
+      ]
+    },
+    "brave-search": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-brave-search"
+      ],
+      "disabled_tools": [
+        
+      ],
+      "env": {
+        "BRAVE_API_KEY": "BSAwuTk5IHyKklX8WUhti3_1trCv4oJ"
+      }
+    },
     "git": {
+      "command": "uvx",
       "args": [
         "mcp-server-git"
-      ],
-      "command": "uvx"
+      ]
     }
   }
 }

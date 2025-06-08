@@ -10,6 +10,19 @@ return {
     },
   },
   {
+    'trippwill/swapdiff.nvim',
+    dev = true,
+    ---@module 'swapdiff'
+    ---@type SwapDiffConfig
+    opts = {
+      prompt_config = {
+        style = 'Interactive', -- 'Interactive' or 'Notify' or 'None'
+        once = true,
+      },
+      log_level = vim.log.levels.TRACE,
+    },
+  },
+  {
     'folke/noice.nvim',
     opts = {
       lsp = {
@@ -22,6 +35,9 @@ return {
       presets = {
         command_palette = true,
         long_message_to_split = true,
+        bottom_search = true, -- use a classic bottom cmdline for search
+        inc_rename = false, -- enables an input dialog for inc-rename.nvim
+        lsp_doc_border = true, -- add a border to hover docs and signature help
       },
     },
   },
@@ -56,15 +72,16 @@ return {
     },
     config = function(_, opts)
       require('bufferline').setup(opts)
-      local wk = require('which-key')
 
+      local wk = require('which-key')
+      local go_to = require('swapdiff.bufferline').go_to
       local bufferline_mappings = {}
 
       for i = 1, 9 do
         table.insert(bufferline_mappings, {
           '<leader>' .. i,
           function()
-            return require('bufferline').go_to(i, true)
+            go_to(i, true)
           end,
           desc = 'Go to buffer ' .. i,
         })
@@ -73,7 +90,7 @@ return {
       table.insert(bufferline_mappings, {
         '<leader>0',
         function()
-          return require('bufferline').go_to(10, true)
+          go_to(10, true)
         end,
         desc = 'Go to buffer 10',
       })
@@ -81,7 +98,7 @@ return {
       table.insert(bufferline_mappings, {
         '<leader>$',
         function()
-          return require('bufferline').go_to(-1, true)
+          go_to(-1, true)
         end,
         desc = 'Go to last buffer',
       })

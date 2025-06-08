@@ -8,10 +8,12 @@ export KEYTIMEOUT=1  # Optional: makes mode switching faster
 source "$ZDOTDIR/.zstyle"
 source <("$HOME/.local/bin/mise" activate zsh)
 source <(fzf --zsh)
+source <(batman --export-env)
+source <(gh copilot alias -- zsh)
 
 # ---------------------------------------------------------
 
-fpath=("$ZDOTDIR/functions"  "$XDG_DATA_HOME/zsh/completions" $fpath)
+fpath=("$ZDOTDIR/functions" $fpath)
 autoload -Uz ${ZDOTDIR}/functions/*(:t)
 
 # ---------------------------------------------------------
@@ -62,22 +64,21 @@ alias ....='cd ../../..'
 alias g='git'
 alias z..='exec zsh && source ~/.zshenv'
 alias z.ed='nvim $ZDOTDIR/.zshrc ~/.zshenv'
+alias -g -- --help='--help 2>&1 | bat --language=help --style=plain'
 
 alias gty.ed='nvim $XDG_CONFIG_HOME/ghostty/config'
 alias gty.keys='ghostty +list-keybinds | column -t -s = -H 1 | fzf --style=minimal --height=10 --info=hidden --border --border-label="ghostty keys" --border-label-pos=4'
 
-alias zyp='sudo zypper --color'
 alias f.p='fzf --preview "bat --color=always {}"'
-alias brain='nvim ~/brain.md'
 
+alias brain='nvim ~/brain.md'
 alias v='nvim'
 alias vn='nvim -u NONE'
 alias vk='NVIM_APPNAME=kickstart.nvim nvim'
 
 # -- Also see functions d.adopt and d.unlink in ~/.config/zsh/functions/
-alias d.stow='stow -d ~/.dotfiles -t ~'
+alias d.stow='stow -d ~/.dotfiles -t ~ --no-folding'
 
-alias cat='bat --color=always'
 alias zg='lazygit'
 
 #----------------------------------------------------------
@@ -91,12 +92,8 @@ source <(starship init zsh)
 PS1=$'%{\e]133;P;k=i\a%}'$PS1$'%{\e]133;B\a\e]122;> \a%}'
 PS2=$'%{\e]133;P;k=s\a%}'$PS2$'%{\e]133;B\a%}'
 
-#source <(oh-my-posh init zsh --config "$XDG_CONFIG_HOME/omp/themes/tripp-pure.toml")
-#source "$XDG_CONFIG_HOME/omp/posh-vi-prompt.zsh"
-
 # ---------------------------------------------------------
 
 if [[ "$TTY" == "/dev/pts/0" ]]; then
-    fastfetch
+    fastfetch --config paleofetch
 fi
-eval "$(gh copilot alias -- zsh)"

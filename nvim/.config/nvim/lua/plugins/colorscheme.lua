@@ -120,11 +120,9 @@ return {
         overrides = function(colors)
           local theme = colors.theme
           local palette = colors.palette
-          local blink_menu = { fg = palette.fujiGray, bg = palette.waveBlue1 }
-          local blink_menu_border = { fg = palette.waveBlue2, bg = palette.waveBlue1 }
+          local popup_menu_border = { fg = palette.waveBlue2, bg = theme.ui.bg_m1 }
           return {
             NormalFloat = { bg = 'none' },
-            FloatBorder = { bg = 'none' },
             FloatTitle = { bg = 'none' },
 
             Pmenu = { fg = theme.ui.shade0, bg = theme.ui.bg_p1, blend = vim.o.pumblend }, -- add `blend = vim.o.pumblend` to enable transparency
@@ -136,16 +134,15 @@ return {
             -- so that you can use it where your still want darker windows.
             -- E.g.: autocmd TermOpen * setlocal winhighlight=Normal:NormalDark
             NormalDark = { fg = theme.ui.fg_dim, bg = theme.ui.bg_m3 },
-
             LazyNormal = { bg = theme.ui.bg_visual, fg = theme.ui.fg },
             MasonNormal = { bg = theme.ui.bg_visual, fg = theme.ui.fg },
 
-            BlinkCmpSignatureHelp = blink_menu,
-            BlinkCmpSignatureHelpBorder = blink_menu_border,
-            BlinkCmpDoc = blink_menu,
-            BlinkCmpDocBorder = blink_menu_border,
-            BlinkCmpMenu = blink_menu,
-            BlinkCmpSignatureHelpBorderr = blink_menu_border,
+            BlinkCmpSignatureHelpBorder = popup_menu_border,
+            BlinkCmpDocBorder = popup_menu_border,
+            BlinkCmpMenuBorder = popup_menu_border,
+
+            -- Borders for floating windows and LSP
+            FloatBorder = popup_menu_border,
           }
         end,
       })

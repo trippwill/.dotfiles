@@ -1,29 +1,29 @@
 return {
   {
-    "zbirenbaum/copilot.lua",
+    'zbirenbaum/copilot.lua',
     --tag = "d661d65b4cab20a5c164f6d9081d91ed324fe4d8",
     --pin = true,
   },
   {
-    "ravitemer/mcphub.nvim",
+    'ravitemer/mcphub.nvim',
     dependencies = {
-      "nvim-lua/plenary.nvim", -- Required for Job and HTTP requests
+      'nvim-lua/plenary.nvim', -- Required for Job and HTTP requests
     },
     -- uncomment the following line to load hub lazily
-    cmd = "MCPHub", -- lazy load
-    build = "pnpm install -g mcp-hub@latest", -- Installs required mcp-hub npm module
+    cmd = 'MCPHub', -- lazy load
+    build = 'pnpm install -g mcp-hub@latest', -- Installs required mcp-hub npm module
     -- uncomment this if you don't want mcp-hub to be available globally or can't use -g
     -- build = "bundled_build.lua", -- Use this and set use_bundled_binary = true in opts  (see Advanced configuration)
     config = function()
-      require("mcphub").setup()
+      require('mcphub').setup()
     end,
   },
   {
-    "olimorris/codecompanion.nvim",
+    'olimorris/codecompanion.nvim',
     opts = {
       extensions = {
         mcphub = {
-          callback = "mcphub.extensions.codecompanion",
+          callback = 'mcphub.extensions.codecompanion',
           opts = {
             make_vars = true,
             make_slash_commands = true,
@@ -33,39 +33,39 @@ return {
       },
     },
     dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-treesitter/nvim-treesitter",
-      "ravitemer/mcphub.nvim",
+      'nvim-lua/plenary.nvim',
+      'nvim-treesitter/nvim-treesitter',
+      'ravitemer/mcphub.nvim',
     },
     keys = {
       {
-        "<Leader>ac",
-        "<cmd>CodeCompanionActions<cr>",
-        mode = { "n", "v" },
+        '<Leader>ac',
+        '<cmd>CodeCompanionActions<cr>',
+        mode = { 'n', 'v' },
         noremap = true,
         silent = true,
-        desc = "Code Actions",
+        desc = 'Code Actions',
       },
       {
-        "<Leader>aa",
-        "<cmd>CodeCompanionChat Toggle<cr>",
-        mode = { "n", "v" },
+        '<Leader>aa',
+        '<cmd>CodeCompanionChat Toggle<cr>',
+        mode = { 'n', 'v' },
         noremap = true,
         silent = true,
-        desc = "Toggle Chat",
+        desc = 'Toggle Chat',
       },
       {
-        "ga",
-        "<cmd>CodeCompanionChat Add<cr>",
-        mode = "v",
+        'ga',
+        '<cmd>CodeCompanionChat Add<cr>',
+        mode = 'v',
         noremap = true,
         silent = true,
-        desc = "Add to Chat",
+        desc = 'Add to Chat',
       },
     },
   },
   {
-    "saghen/blink.cmp",
+    'saghen/blink.cmp',
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
     opts = {
@@ -73,7 +73,7 @@ return {
         use_nvim_cmp_as_default = true,
       },
       keymap = {
-        preset = "enter",
+        preset = 'enter',
       },
       signature = {
         enabled = false,

@@ -4,3 +4,4 @@
 
 vim.g.ai_cmp = true
 vim.o.statuscolumn = [[%!v:lua.require'modechar'.get('gutter') .. v:lua.require'snacks.statuscolumn'.get()]]
+vim.o.winborder = 'rounded'
