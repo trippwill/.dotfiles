@@ -88,6 +88,11 @@ alias d.rootrestow='stow -d ~/.dotfiles/.root -t / --no-folding --restow'
 
 alias zg='lazygit'
 
+alias sc='systemctl'
+alias scu='systemctl --user'
+alias jc='journalctl'
+alias jcu='journalctl --user'
+
 #----------------------------------------------------------
 
 function set_win_title(){
