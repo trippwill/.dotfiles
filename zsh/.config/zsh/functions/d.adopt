@@ -1,29 +1,71 @@
 #! /usr/bin/env zsh
+# vim:ft=zsh
+# shellcheck shell=bash
 
+## Usage: d.adopt [--confirm] [--root] <package> <file>
+#
+#   --confirm   Actually perform the adoption (otherwise dry-run)
+#   --root      Adopt files relative to / (for system files), stores in .root subdir, calls stow with sudo
+#   <package>   Name of the stow package (subdir in dotfiles)
+#   <file>      Path to the file to adopt
+#
+# Examples:
+#   d.adopt nvim ~/.config/nvim/init.vim
+#   d.adopt --confirm nvim ~/.config/nvim/init.vim
+#   d.adopt --root --confirm sshd /etc/ssh/sshd_config
+#
+# Both <package> and <file> are required.
+#
+# NOTE: This script uses 'realpath --relative-to', which is available on  GNU systems.
+# On macOS, 'realpath' may not be installed or may lack this option.
+# If you are a macOS user and want compatibility, please submit a patch.
 function d.adopt() {
+  # Check for required commands
+  if ! command -v realpath >/dev/null 2>&1; then
+    echo "Error: 'realpath' command not found."
+    return 1
+  fi
+  if ! command -v stow >/dev/null 2>&1; then
+    echo "Error: 'stow' command not found."
+    return 1
+  fi
+
   local package=""
   local file=""
   local confirm="false"
-  local dotfiles_dir=${DOTFILES_DIR:-$HOME/.dotfiles}
+
+  local dotfiles_dir="${DOTFILES_DIR:-$HOME/.dotfiles}"
+  local base_dir="$HOME"
+  local usesudo=
 
   # Parse arguments
   while [[ "$#" -gt 0 ]]; do
     case "$1" in
-      --confirm)
-        confirm="true"
-        shift
-        ;;
-      *)
-        if [[ -z "$package" ]]; then
-          package="$1"
-        elif [[ -z "$file" ]]; then
-          file="$1"
-        else
-          echo "Error: Unexpected argument '$1'."
-          return 1
-        fi
-        shift
-        ;;
+    --confirm)
+      confirm="true"
+      shift
+      ;;
+    --root)
+      dotfiles_dir="${dotfiles_dir%/}/.root"
+      base_dir="/"
+      usesudo="sudo"
+      shift
+      ;;
+    --*)
+      echo "Error: Unknown flag '$1'."
+      return 1
+      ;;
+    *)
+      if [[ -z "$package" ]]; then
+        package="$1"
+      elif [[ -z "$file" ]]; then
+        file="$1"
+      else
+        echo "Error: Unexpected argument '$1'."
+        return 1
+      fi
+      shift
+      ;;
     esac
   done
 
@@ -64,12 +106,14 @@ function d.adopt() {
   fi
 
   local target_path
-  target_path="$dotfiles_dir/$package/$(realpath --relative-to="$HOME" "$file" 2>/dev/null)"
+  target_path="$dotfiles_dir/$package/$(realpath --relative-to="$base_dir" "$file" 2>/dev/null)"
+  # shellcheck disable=SC2181 # checking the exit status of realpath
   if [[ $? -ne 0 ]]; then
     echo "Error: Failed to resolve the relative path for '$file'."
     return 1
   fi
-  local target_dir=$(dirname "$target_path")
+  local target_dir
+  target_dir=$(dirname "$target_path")
 
   # if target_dir does not exist, print a notice that it will be created
   if [[ ! -d "$target_dir" ]]; then
@@ -78,6 +122,7 @@ function d.adopt() {
   fi
 
   # if target_path does not exist, print a notice that it will be created
+  # this is required for stow to know the file path is part of the package
   if [[ ! -f "$target_path" ]]; then
     echo "$target_path does not exist, creating it..."
     touch "$target_path"
@@ -85,8 +130,8 @@ function d.adopt() {
 
   # adopt the package (simulate if confirm is not true)
   if [[ "$confirm" == "true" ]]; then
-    stow -d "$dotfiles_dir" -t "$HOME" -v --adopt "$package"
+    $usesudo stow -d "$dotfiles_dir" -t "$base_dir" -v --adopt "$package"
   else
-    stow -d "$dotfiles_dir" -t "$HOME" -nv --adopt "$package"
+    $usesudo stow -d "$dotfiles_dir" -t "$base_dir" -nv --adopt "$package"
   fi
 }

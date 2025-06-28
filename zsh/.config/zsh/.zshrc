@@ -1,3 +1,4 @@
+# shellcheck disable=all
 setopt autocd extendedglob
 unsetopt beep
 bindkey -v
@@ -62,7 +63,7 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias g='git'
-alias z..='exec zsh && source ~/.zshenv'
+alias z..='source ~/.zshenv && exec zsh'
 alias z.ed='nvim $ZDOTDIR/.zshrc ~/.zshenv'
 alias -g -- --help='--help 2>&1 | bat --language=help --style=plain'
 
@@ -75,9 +76,15 @@ alias brain='nvim ~/brain.md'
 alias v='nvim'
 alias vn='nvim -u NONE'
 alias vk='NVIM_APPNAME=kickstart.nvim nvim'
+alias sued='sudoedit'
 
 # -- Also see functions d.adopt and d.unlink in ~/.config/zsh/functions/
 alias d.stow='stow -d ~/.dotfiles -t ~ --no-folding'
+alias d.unstow='stow -d ~/.dotfiles -t ~ --no-folding --delete'
+alias d.restow='stow -d ~/.dotfiles -t ~ --no-folding --restow'
+alias d.rootstow='stow -d ~/.dotfiles/.root -t / --no-folding'
+alias d.rootunstow='stow -d ~/.dotfiles/.root -t / --no-folding --delete'
+alias d.rootrestow='stow -d ~/.dotfiles/.root -t / --no-folding --restow'
 
 alias zg='lazygit'
 

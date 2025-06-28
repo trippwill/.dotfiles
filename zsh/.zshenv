@@ -7,10 +7,11 @@ export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
 export ZDOTDIR="${XDG_CONFIG_HOME}/zsh"
 
 export TERMINAL="ghostty"
+export NVIM_LATEST="${XDG_DATA_HOME}/mise/installs/neovim/latest/nvim-linux-x86_64/bin/nvim"
 
 # Set the default editor to nvim
-export EDITOR="nvim"
-export VISUAL="nvim"
+export EDITOR="$NVIM_LATEST"
+export VISUAL="$NVIM_LATEST"
 
 # Set the default pager to less
 export PAGER="less"

@@ -1,8 +1,19 @@
+local use_sudo=0
+if [ "$1" = "--root" ]; then
+  use_sudo=1
+  shift
+fi
+
+
 local link="$1"
 local target=$(realpath -- "$link")
 if [ ! -L "$link" ]; then
   echo "Not a symlink: $link"
   return 1
 fi
-rm -- "$link" && mv -- "$target" "$link"
 
+if [ $use_sudo -eq 1 ]; then
+  sudo rm -- "$link" && sudo mv -- "$target" "$link"
+else
+  rm -- "$link" && mv -- "$target" "$link"
+fi
