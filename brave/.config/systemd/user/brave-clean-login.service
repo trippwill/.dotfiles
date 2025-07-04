@@ -1,0 +1,11 @@
+[Unit]
+Description=Patch Brave profiles for a clean exit each graphical login
+PartOf=graphical-session.target
+
+[Service]
+Type=oneshot
+ExecStart=%h/.local/bin/patch-brave-preferences.sh
+
+[Install]
+WantedBy=graphical-session.target
+
