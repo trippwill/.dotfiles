@@ -62,6 +62,10 @@ alias tree="eza --tree '--ignore-glob=**/*.git' $eza_params"
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
+alias rm='rm -Iv --preserve-root'
+alias rm.n='/usr/bin/rm --preserve-root'
+alias cp='cp -i --preserve=mode,ownership,timestamps'
+
 alias g='git'
 alias z..='source ~/.zshenv && exec zsh'
 alias z.ed='nvim $ZDOTDIR/.zshrc ~/.zshenv'
@@ -82,9 +86,17 @@ alias sued='sudoedit'
 alias d.stow='stow -d ~/.dotfiles -t ~ --no-folding'
 alias d.unstow='stow -d ~/.dotfiles -t ~ --no-folding --delete'
 alias d.restow='stow -d ~/.dotfiles -t ~ --no-folding --restow'
-alias d.rootstow='stow -d ~/.dotfiles/.root -t / --no-folding'
-alias d.rootunstow='stow -d ~/.dotfiles/.root -t / --no-folding --delete'
-alias d.rootrestow='stow -d ~/.dotfiles/.root -t / --no-folding --restow'
+alias d.ls='ll ~/.dotfiles'
+d.tree() {
+  tree -a ~/.dotfiles/"$@"
+}
+alias d.root.stow='stow -d ~/.dotfiles/.root -t / --no-folding'
+alias d.root.unstow='stow -d ~/.dotfiles/.root -t / --no-folding --delete'
+alias d.root.restow='stow -d ~/.dotfiles/.root -t / --no-folding --restow'
+alias d.root.ls='ll ~/.dotfiles/.root'
+d.root.tree() {
+  tree -a ~/.dotfiles/.root/"$@"
+}
 
 alias zg='lazygit'
 
