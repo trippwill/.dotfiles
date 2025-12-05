@@ -1,10 +1,5 @@
 return {
   {
-    'zbirenbaum/copilot.lua',
-    --tag = "d661d65b4cab20a5c164f6d9081d91ed324fe4d8",
-    --pin = true,
-  },
-  {
     'ravitemer/mcphub.nvim',
     dependencies = {
       'nvim-lua/plenary.nvim', -- Required for Job and HTTP requests
@@ -20,8 +15,11 @@ return {
   },
   {
     'olimorris/codecompanion.nvim',
-    opts = {
-      extensions = {
+    init = function()
+      require('plugins/extensions/ai-notification').init()
+    end,
+    opts = function(opts)
+      opts.extensions = {
         mcphub = {
           callback = 'mcphub.extensions.codecompanion',
           opts = {
@@ -30,12 +28,23 @@ return {
             show_result_in_chat = true,
           },
         },
-      },
-    },
+        vectorcode = {},
+      }
+
+      return opts
+    end,
     dependencies = {
       'nvim-lua/plenary.nvim',
       'nvim-treesitter/nvim-treesitter',
       'ravitemer/mcphub.nvim',
+      'folke/noice.nvim',
+      {
+        'Davidyz/VectorCode',
+        version = '*',
+        build = 'uv tool upgrade vectorcode', -- This helps keeping the CLI up-to-date
+        -- build = "pipx upgrade vectorcode", -- If you used pipx to install the CLI
+        dependencies = { 'nvim-lua/plenary.nvim' },
+      },
     },
     keys = {
       {
@@ -64,27 +73,28 @@ return {
       },
     },
   },
-  {
-    'saghen/blink.cmp',
-    ---@module 'blink.cmp'
-    ---@type blink.cmp.Config
-    opts = {
-      appearance = {
-        use_nvim_cmp_as_default = true,
-      },
-      keymap = {
-        preset = 'enter',
-      },
-      signature = {
-        enabled = false,
-      },
-      completion = {
-        ghost_text = {
-          enabled = false,
-        },
-      },
-    },
-  },
+  -- {
+  --   'saghen/blink.cmp',
+  --   ---@module 'blink.cmp'
+  --   ---@type blink.cmp.Config
+  --   opts = {
+  --     appearance = {
+  --       use_nvim_cmp_as_default = true,
+  --     },
+  --     keymap = {
+  --       preset = 'enter',
+  --       ['<C-k>'] = false,
+  --     },
+  --     signature = {
+  --       enabled = true,
+  --     },
+  --     completion = {
+  --       ghost_text = {
+  --         enabled = false,
+  --       },
+  --     },
+  --   },
+  -- },
   -- {
   --   "zbirenbaum/copilot.lua",
   --   event = "InsertEnter",

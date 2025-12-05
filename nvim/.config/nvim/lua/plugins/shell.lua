@@ -24,22 +24,22 @@ return {
   },
   {
     'folke/noice.nvim',
-    opts = {
-      lsp = {
-        signature = {
-          auto_open = {
-            enabled = false,
-          },
-        },
-      },
-      presets = {
+    -- keep your existing options
+    opts = function(_, opts)
+      opts = opts or {}
+      opts.lsp = opts.lsp or {}
+      opts.lsp.signature = { auto_open = { enabled = false } }
+
+      opts.presets = vim.tbl_deep_extend('force', opts.presets or {}, {
         command_palette = true,
         long_message_to_split = true,
-        bottom_search = true, -- use a classic bottom cmdline for search
-        inc_rename = false, -- enables an input dialog for inc-rename.nvim
-        lsp_doc_border = true, -- add a border to hover docs and signature help
-      },
-    },
+        bottom_search = true,
+        inc_rename = false,
+        lsp_doc_border = true,
+      })
+
+      return opts
+    end,
   },
   {
     'nvim-lualine/lualine.nvim',
@@ -104,6 +104,40 @@ return {
       })
 
       wk.add({ hidden = true, mode = 'n', bufferline_mappings })
+    end,
+  },
+  {
+    'rachartier/tiny-inline-diagnostic.nvim',
+    event = 'VeryLazy',
+    priority = 1000,
+    config = function()
+      require('tiny-inline-diagnostic').setup()
+      vim.diagnostic.config({ virtual_text = false }) -- Disable default virtual text
+    end,
+  },
+  {
+    'nvim-mini/mini.align',
+    opts = {
+      mappings = {
+        start = 'gt',
+        start_with_preview = 'gT',
+      },
+    },
+  },
+  {
+    'Kicamon/markdown-table-mode.nvim',
+    config = function()
+      require('markdown-table-mode').setup({
+        filetype = {
+          '*.md',
+        },
+        options = {
+          insert = true, -- when typing "|"
+          insert_leave = true, -- when leaving insert
+          pad_separator_line = true, -- add space in separator line
+          alig_style = 'default', -- default, left, center, right
+        },
+      })
     end,
   },
 }

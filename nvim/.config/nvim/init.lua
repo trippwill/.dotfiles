@@ -1,12 +1,13 @@
+vim.o.clipboard = 'unnamedplus'
 -- vim.g.clipboard = {
---   name = "win-safe",
+--   name = 'OSC 52',
 --   copy = {
---     ["+"] = "wl-copy",
---     ["*"] = "wl-copy",
+--     ['+'] = require('vim.ui.clipboard.osc52').copy('+'),
+--     ['*'] = require('vim.ui.clipboard.osc52').copy('*'),
 --   },
 --   paste = {
---     ["+"] = "win-wl-paste",
---     ["*"] = "win-wl-paste",
+--     ['+'] = require('vim.ui.clipboard.osc52').paste('+'),
+--     ['*'] = require('vim.ui.clipboard.osc52').paste('*'),
 --   },
 -- }
 

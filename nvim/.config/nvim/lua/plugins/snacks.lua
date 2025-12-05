@@ -10,6 +10,15 @@ return {
           explorer = {
             jump = { close = true }, -- close the explorer when jumping to a file
             replace_netrw = true,
+            watch = true,
+            hidden = true,
+            ignored = false,
+            ignore = {
+              '.git',
+              'node_modules',
+              '.cache',
+              'artifacts/**',
+            },
           },
         },
       },

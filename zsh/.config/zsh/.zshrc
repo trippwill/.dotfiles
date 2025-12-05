@@ -32,7 +32,7 @@ antidote bundle romkatv/zsh-bench kind:path
 antidote bundle nikevsoft/tmux-sessionizer
 antidote bundle zsh-users/zsh-completions kind:fpath path:src
 antidote bundle zsh-users/zsh-autosuggestions
-antidote bundle Aloxaf/fzf-tab
+# antidote bundle Aloxaf/fzf-tab
 antidote bundle zdharma-continuum/fast-syntax-highlighting kind:defer
 antidote bundle belak/zsh-utils path:history
 antidote bundle belak/zsh-utils path:completion
@@ -52,8 +52,8 @@ alias l='eza --git-ignore $eza_params'
 alias ll='eza --all --all --long $eza_params'
 alias lg='eza --all --all --long --git-repos $eza_params'
 alias llm='eza --all --header --long --sort=modified $eza_params'
-alias la='eza -lbhHigUmuSa'
-alias lx='eza -lbhHigUmuSa@'
+alias la='eza -lbhHiguSa'
+alias lx='eza -lbhHiguSa@'
 alias lt="eza --all --long --tree --git-repos '--ignore-glob=**/.git' $eza_params"
 alias tree="eza --tree '--ignore-glob=**/*.git' $eza_params"
 
@@ -71,6 +71,7 @@ alias z..='source ~/.zshenv && exec zsh'
 alias z.ed='nvim $ZDOTDIR/.zshrc ~/.zshenv'
 alias -g -- --help='--help 2>&1 | bat --language=help --style=plain'
 
+alias gty='ghostty'
 alias gty.ed='nvim $XDG_CONFIG_HOME/ghostty/config'
 alias gty.keys='ghostty +list-keybinds | column -t -s = -H 1 | fzf --style=minimal --height=10 --info=hidden --border --border-label="ghostty keys" --border-label-pos=4'
 
@@ -81,6 +82,7 @@ alias v='nvim'
 alias vn='nvim -u NONE'
 alias vk='NVIM_APPNAME=kickstart.nvim nvim'
 alias sued='sudoedit'
+alias wssh='waypipe ssh'
 
 # -- Also see functions d.adopt and d.unlink in ~/.config/zsh/functions/
 alias d.stow='stow -d ~/.dotfiles -t ~ --no-folding'
@@ -104,6 +106,9 @@ alias sc='systemctl'
 alias scu='systemctl --user'
 alias jc='journalctl'
 alias jcu='journalctl --user'
+
+alias rfs.m='sshfs -o allow_other,default_permissions,idmap=user'
+alias rfs.u='fusermount -u'
 
 #----------------------------------------------------------
 
